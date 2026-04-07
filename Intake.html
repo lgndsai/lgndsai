@@ -5,6 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LGNDS AI — Voice Agent Project Intake</title>
+<meta name="description" content="LGNDS AI Voice Agent Project Intake Form">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23C9A84C'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='18' fill='%230A0A0A'%3EL%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -19,6 +21,7 @@
     --text-mid: #AAAAAA;
     --input-bg: #1A1A1A;
     --danger: #E84855;
+    --success: #4CAF50;
   }
 
 - { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,7 +34,6 @@ min-height: 100vh;
 line-height: 1.6;
 }
 
-/* Subtle grid background */
 body::before {
 content: ‘’;
 position: fixed;
@@ -131,7 +133,7 @@ margin-bottom: 20px;
 margin-bottom: 0;
 }
 
-label {
+label.field-label {
 display: block;
 font-size: 13px;
 font-weight: 600;
@@ -206,6 +208,8 @@ gap: 16px;
 
 @media (max-width: 540px) {
 .row { grid-template-columns: 1fr; }
+.container { padding: 28px 16px 48px; }
+.section { padding: 24px 18px; }
 }
 
 /* Checkbox group */
@@ -227,6 +231,7 @@ width: 18px;
 height: 18px;
 accent-color: var(–gold);
 cursor: pointer;
+flex-shrink: 0;
 }
 
 .check-item span {
@@ -270,12 +275,118 @@ transform: translateY(-1px);
 transform: translateY(0);
 }
 
+.btn-submit:disabled {
+opacity: 0.6;
+cursor: not-allowed;
+transform: none;
+}
+
 .footer-note {
 text-align: center;
 font-size: 12px;
 color: #444;
 margin-top: 40px;
 letter-spacing: 0.5px;
+}
+
+/* Status messages */
+.status-msg {
+display: none;
+text-align: center;
+padding: 16px;
+border-radius: 6px;
+margin-top: 16px;
+font-size: 14px;
+font-weight: 500;
+}
+
+.status-msg.success {
+display: block;
+background: rgba(76,175,80,0.1);
+border: 1px solid rgba(76,175,80,0.3);
+color: var(–success);
+}
+
+.status-msg.error {
+display: block;
+background: rgba(232,72,85,0.1);
+border: 1px solid rgba(232,72,85,0.3);
+color: var(–danger);
+}
+
+/* Success overlay */
+.success-overlay {
+display: none;
+position: fixed;
+inset: 0;
+background: rgba(10,10,10,0.95);
+z-index: 100;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+text-align: center;
+padding: 24px;
+}
+
+.success-overlay.show {
+display: flex;
+}
+
+.success-icon {
+width: 72px;
+height: 72px;
+border-radius: 50%;
+background: rgba(201,168,76,0.15);
+border: 2px solid var(–gold);
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 28px;
+}
+
+.success-icon svg {
+width: 36px;
+height: 36px;
+stroke: var(–gold);
+}
+
+.success-overlay h2 {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 32px;
+letter-spacing: 3px;
+color: var(–gold);
+margin-bottom: 12px;
+}
+
+.success-overlay p {
+font-size: 15px;
+color: var(–text-dim);
+max-width: 420px;
+line-height: 1.7;
+}
+
+/* Loading spinner */
+.spinner {
+display: inline-block;
+width: 18px;
+height: 18px;
+border: 2px solid var(–black);
+border-top-color: transparent;
+border-radius: 50%;
+animation: spin 0.6s linear infinite;
+vertical-align: middle;
+margin-right: 8px;
+}
+
+@keyframes spin {
+to { transform: rotate(360deg); }
+}
+
+/* Validation error */
+.field-error input,
+.field-error textarea,
+.field-error select {
+border-color: var(–danger);
 }
 </style>
 
@@ -294,227 +405,325 @@ letter-spacing: 0.5px;
     </div>
   </div>
 
-  <!-- Section 1: Contact -->
-
-  <div class="section">
-    <div class="section-number">01</div>
-    <div class="section-title">Contact Information</div>
+  <div id="intake-form">
 
 ```
-<div class="row">
-  <div class="field">
-    <label class="required">Full Name</label>
-    <input type="text" placeholder="John Smith">
-  </div>
-  <div class="field">
-    <label class="required">Company Name</label>
-    <input type="text" placeholder="Your company">
-  </div>
-</div>
-
-<div class="row">
-  <div class="field">
-    <label class="required">Email</label>
-    <input type="email" placeholder="john@company.com">
-  </div>
-  <div class="field">
-    <label class="required">Phone</label>
-    <input type="tel" placeholder="(555) 555-5555">
-  </div>
-</div>
-
-<div class="field">
-  <label>Website or App URL</label>
-  <input type="url" placeholder="https://yourapp.com">
-  <div class="field-hint">If you have a live app or landing page, drop it here.</div>
-</div>
-```
-
-  </div>
-
-  <!-- Section 2: Project Overview -->
-
-  <div class="section">
-    <div class="section-number">02</div>
-    <div class="section-title">Project Overview</div>
-
-```
-<div class="field">
-  <label class="required">Describe what you need the voice agent to do</label>
-  <textarea rows="4" placeholder="Example: Call private aviation companies, request quotes for specific routes, collect pricing, compare rates across carriers, and book the best option for the end user."></textarea>
-</div>
-
-<div class="field">
-  <label class="required">Who is the end user?</label>
-  <textarea rows="2" placeholder="Example: High-net-worth individuals booking private flights through our app."></textarea>
-  <div class="field-hint">Who will be triggering or benefiting from the voice agent?</div>
-</div>
-
-<div class="field">
-  <label class="required">What companies or services will the agent be calling?</label>
-  <textarea rows="3" placeholder="List specific airlines, brokers, or charter companies. If unknown, describe the type of companies."></textarea>
-</div>
-
-<div class="field">
-  <label>What information will the agent need to collect on each call?</label>
-  <textarea rows="3" placeholder="Example: Price per route, aircraft type, availability, baggage limits, cancellation policy..."></textarea>
-</div>
-```
-
-  </div>
-
-  <!-- Section 3: Technical -->
-
-  <div class="section">
-    <div class="section-number">03</div>
-    <div class="section-title">Technical Details</div>
-
-```
-<div class="row">
-  <div class="field">
-    <label>What is the app built with?</label>
-    <select>
-      <option value="" disabled selected>Select tech stack</option>
-      <option>React Native</option>
-      <option>Flutter</option>
-      <option>Swift (iOS Native)</option>
-      <option>Kotlin (Android Native)</option>
-      <option>Web App (React/Next.js)</option>
-      <option>Other</option>
-      <option>Not sure</option>
-    </select>
-  </div>
-  <div class="field">
-    <label>Do you have an existing API?</label>
-    <select>
-      <option value="" disabled selected>Select one</option>
-      <option>Yes, fully built</option>
-      <option>Yes, partially built</option>
-      <option>No, not yet</option>
-      <option>Not sure</option>
-    </select>
-  </div>
-</div>
-
-<div class="field">
-  <label>How should the voice agent connect to your app?</label>
-  <div class="check-group">
-    <label class="check-item"><input type="checkbox"><span>API integration (agent sends data to your backend)</span></label>
-    <label class="check-item"><input type="checkbox"><span>In-app voice button (user talks to agent inside the app)</span></label>
-    <label class="check-item"><input type="checkbox"><span>Standalone phone number (agent operates via phone calls)</span></label>
-    <label class="check-item"><input type="checkbox"><span>Dashboard/portal (results displayed in a web view)</span></label>
-    <label class="check-item"><input type="checkbox"><span>Not sure yet, need guidance</span></label>
-  </div>
-</div>
-
-<div class="field">
-  <label>Any other tools or platforms we need to integrate with?</label>
-  <input type="text" placeholder="Example: Salesforce, Google Sheets, Slack, custom CRM...">
-</div>
-```
-
-  </div>
-
-  <!-- Section 4: Scale & Timeline -->
-
-  <div class="section">
-    <div class="section-number">04</div>
-    <div class="section-title">Scale & Timeline</div>
-
-```
-<div class="row">
-  <div class="field">
-    <label>Estimated monthly call volume</label>
-    <select>
-      <option value="" disabled selected>Select range</option>
-      <option>Under 100 calls</option>
-      <option>100 to 500 calls</option>
-      <option>500 to 1,000 calls</option>
-      <option>1,000 to 5,000 calls</option>
-      <option>5,000+ calls</option>
-      <option>Not sure yet</option>
-    </select>
-  </div>
-  <div class="field">
-    <label>Average call duration estimate</label>
-    <select>
-      <option value="" disabled selected>Select range</option>
-      <option>Under 2 minutes</option>
-      <option>2 to 5 minutes</option>
-      <option>5 to 10 minutes</option>
-      <option>10+ minutes</option>
-      <option>No idea</option>
-    </select>
-  </div>
-</div>
-
-<div class="row">
-  <div class="field">
-    <label class="required">When do you need this live?</label>
-    <select>
-      <option value="" disabled selected>Select timeline</option>
-      <option>ASAP (1 to 2 weeks)</option>
-      <option>This month</option>
-      <option>Within 60 days</option>
-      <option>No rush, just scoping</option>
-    </select>
-  </div>
-  <div class="field">
-    <label>Budget range for the build</label>
-    <select>
-      <option value="" disabled selected>Select range</option>
-      <option>$5K to $10K</option>
-      <option>$10K to $15K</option>
-      <option>$15K to $25K</option>
-      <option>$25K+</option>
-      <option>Need guidance on pricing</option>
-    </select>
-  </div>
-</div>
-
-<div class="field">
-  <label>Should the agent be able to actually book flights or just collect and compare rates?</label>
-  <select>
-    <option value="" disabled selected>Select one</option>
-    <option>Collect and compare rates only</option>
-    <option>Collect, compare, AND book</option>
-    <option>Start with rates, add booking later</option>
-  </select>
-</div>
-```
-
-  </div>
-
-  <!-- Section 5: Anything Else -->
-
-  <div class="section">
-    <div class="section-number">05</div>
-    <div class="section-title">Anything Else</div>
-
-```
-<div class="field">
-  <label>Any specific requirements, concerns, or context we should know?</label>
-  <textarea rows="4" placeholder="Anything else that would help us understand your vision and build the right solution."></textarea>
-</div>
-
-<div class="field">
-  <label>How did you hear about LGNDS AI?</label>
-  <input type="text" placeholder="Referral, LinkedIn, other...">
-</div>
-```
-
-  </div>
-
-  <div class="cta-section">
-    <div class="cta-note">
-      Once submitted, our team will review your answers and send a custom proposal within 24 hours.
+<!-- Section 1: Contact -->
+<div class="section">
+  <div class="section-number">01</div>
+  <div class="section-title">Contact Information</div>
+  <div class="row">
+    <div class="field" id="f-name">
+      <label class="field-label required">Full Name</label>
+      <input type="text" name="full_name" placeholder="John Smith">
     </div>
-    <button class="btn-submit" onclick="alert('Form submitted! LGNDS AI will be in touch within 24 hours.')">SUBMIT INTAKE</button>
+    <div class="field" id="f-company">
+      <label class="field-label required">Company Name</label>
+      <input type="text" name="company_name" placeholder="Your company">
+    </div>
+  </div>
+  <div class="row">
+    <div class="field" id="f-email">
+      <label class="field-label required">Email</label>
+      <input type="email" name="email" placeholder="john@company.com">
+    </div>
+    <div class="field" id="f-phone">
+      <label class="field-label required">Phone</label>
+      <input type="tel" name="phone" placeholder="(555) 555-5555">
+    </div>
+  </div>
+  <div class="field">
+    <label class="field-label">Website or App URL</label>
+    <input type="url" name="website" placeholder="https://yourapp.com">
+    <div class="field-hint">If you have a live app or landing page, drop it here.</div>
+  </div>
+</div>
+
+<!-- Section 2: Project Overview -->
+<div class="section">
+  <div class="section-number">02</div>
+  <div class="section-title">Project Overview</div>
+  <div class="field" id="f-agent-desc">
+    <label class="field-label required">Describe what you need the voice agent to do</label>
+    <textarea name="agent_description" rows="4" placeholder="Example: Call private aviation companies, request quotes for specific routes, collect pricing, compare rates across carriers, and book the best option for the end user."></textarea>
+  </div>
+  <div class="field" id="f-end-user">
+    <label class="field-label required">Who is the end user?</label>
+    <textarea name="end_user" rows="2" placeholder="Example: High-net-worth individuals booking private flights through our app."></textarea>
+    <div class="field-hint">Who will be triggering or benefiting from the voice agent?</div>
+  </div>
+  <div class="field" id="f-companies">
+    <label class="field-label required">What companies or services will the agent be calling?</label>
+    <textarea name="target_companies" rows="3" placeholder="List specific airlines, brokers, or charter companies. If unknown, describe the type of companies."></textarea>
+  </div>
+  <div class="field">
+    <label class="field-label">What information will the agent need to collect on each call?</label>
+    <textarea name="data_to_collect" rows="3" placeholder="Example: Price per route, aircraft type, availability, baggage limits, cancellation policy..."></textarea>
+  </div>
+</div>
+
+<!-- Section 3: Technical -->
+<div class="section">
+  <div class="section-number">03</div>
+  <div class="section-title">Technical Details</div>
+  <div class="row">
+    <div class="field">
+      <label class="field-label">What is the app built with?</label>
+      <select name="tech_stack">
+        <option value="" disabled selected>Select tech stack</option>
+        <option>React Native</option>
+        <option>Flutter</option>
+        <option>Swift (iOS Native)</option>
+        <option>Kotlin (Android Native)</option>
+        <option>Web App (React/Next.js)</option>
+        <option>Other</option>
+        <option>Not sure</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="field-label">Do you have an existing API?</label>
+      <select name="existing_api">
+        <option value="" disabled selected>Select one</option>
+        <option>Yes, fully built</option>
+        <option>Yes, partially built</option>
+        <option>No, not yet</option>
+        <option>Not sure</option>
+      </select>
+    </div>
+  </div>
+  <div class="field">
+    <label class="field-label">How should the voice agent connect to your app?</label>
+    <div class="check-group">
+      <label class="check-item"><input type="checkbox" name="integration" value="API integration"><span>API integration (agent sends data to your backend)</span></label>
+      <label class="check-item"><input type="checkbox" name="integration" value="In-app voice button"><span>In-app voice button (user talks to agent inside the app)</span></label>
+      <label class="check-item"><input type="checkbox" name="integration" value="Standalone phone number"><span>Standalone phone number (agent operates via phone calls)</span></label>
+      <label class="check-item"><input type="checkbox" name="integration" value="Dashboard/portal"><span>Dashboard/portal (results displayed in a web view)</span></label>
+      <label class="check-item"><input type="checkbox" name="integration" value="Need guidance"><span>Not sure yet, need guidance</span></label>
+    </div>
+  </div>
+  <div class="field">
+    <label class="field-label">Any other tools or platforms we need to integrate with?</label>
+    <input type="text" name="other_tools" placeholder="Example: Salesforce, Google Sheets, Slack, custom CRM...">
+  </div>
+</div>
+
+<!-- Section 4: Scale & Timeline -->
+<div class="section">
+  <div class="section-number">04</div>
+  <div class="section-title">Scale & Timeline</div>
+  <div class="row">
+    <div class="field">
+      <label class="field-label">Estimated monthly call volume</label>
+      <select name="call_volume">
+        <option value="" disabled selected>Select range</option>
+        <option>Under 100 calls</option>
+        <option>100 to 500 calls</option>
+        <option>500 to 1,000 calls</option>
+        <option>1,000 to 5,000 calls</option>
+        <option>5,000+ calls</option>
+        <option>Not sure yet</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="field-label">Average call duration estimate</label>
+      <select name="call_duration">
+        <option value="" disabled selected>Select range</option>
+        <option>Under 2 minutes</option>
+        <option>2 to 5 minutes</option>
+        <option>5 to 10 minutes</option>
+        <option>10+ minutes</option>
+        <option>No idea</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="field" id="f-timeline">
+      <label class="field-label required">When do you need this live?</label>
+      <select name="timeline">
+        <option value="" disabled selected>Select timeline</option>
+        <option>ASAP (1 to 2 weeks)</option>
+        <option>This month</option>
+        <option>Within 60 days</option>
+        <option>No rush, just scoping</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="field-label">Budget range for the build</label>
+      <select name="budget">
+        <option value="" disabled selected>Select range</option>
+        <option>$5K to $10K</option>
+        <option>$10K to $15K</option>
+        <option>$15K to $25K</option>
+        <option>$25K+</option>
+        <option>Need guidance on pricing</option>
+      </select>
+    </div>
+  </div>
+  <div class="field">
+    <label class="field-label">Should the agent be able to actually book flights or just collect and compare rates?</label>
+    <select name="booking_scope">
+      <option value="" disabled selected>Select one</option>
+      <option>Collect and compare rates only</option>
+      <option>Collect, compare, AND book</option>
+      <option>Start with rates, add booking later</option>
+    </select>
+  </div>
+</div>
+
+<!-- Section 5: Anything Else -->
+<div class="section">
+  <div class="section-number">05</div>
+  <div class="section-title">Anything Else</div>
+  <div class="field">
+    <label class="field-label">Any specific requirements, concerns, or context we should know?</label>
+    <textarea name="additional_notes" rows="4" placeholder="Anything else that would help us understand your vision and build the right solution."></textarea>
+  </div>
+  <div class="field">
+    <label class="field-label">How did you hear about LGNDS AI?</label>
+    <input type="text" name="referral_source" placeholder="Referral, LinkedIn, other...">
+  </div>
+</div>
+
+<div class="cta-section">
+  <div class="cta-note">
+    Once submitted, our team will review your answers and send a custom proposal within 24 hours.
+  </div>
+  <button class="btn-submit" id="submit-btn" onclick="submitForm()">SUBMIT INTAKE</button>
+  <div class="status-msg" id="status-msg"></div>
+</div>
+```
+
   </div>
 
   <div class="footer-note">LGNDS AI &mdash; Built to Automate. Designed to Scale.</div>
 
 </div>
+
+<!-- Success Overlay -->
+
+<div class="success-overlay" id="success-overlay">
+  <div class="success-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </div>
+  <h2>INTAKE RECEIVED</h2>
+  <p>Thank you! The LGNDS AI team will review your details and send a custom proposal within 24 hours.</p>
+</div>
+
+<script>
+  // ============================================================
+  // CONFIGURATION — UPDATE THIS WITH YOUR n8n WEBHOOK URL
+  // ============================================================
+  const WEBHOOK_URL = 'https://lgndsai.app.n8n.cloud/webhook/intake-form';
+  // ============================================================
+
+  function getFormData() {
+    const data = {};
+
+    // Text inputs, emails, urls, tels
+    document.querySelectorAll('#intake-form input[type="text"], #intake-form input[type="email"], #intake-form input[type="tel"], #intake-form input[type="url"]').forEach(el => {
+      if (el.name) data[el.name] = el.value.trim();
+    });
+
+    // Textareas
+    document.querySelectorAll('#intake-form textarea').forEach(el => {
+      if (el.name) data[el.name] = el.value.trim();
+    });
+
+    // Selects
+    document.querySelectorAll('#intake-form select').forEach(el => {
+      if (el.name) data[el.name] = el.value || '';
+    });
+
+    // Checkboxes (integration methods)
+    const integrations = [];
+    document.querySelectorAll('input[name="integration"]:checked').forEach(el => {
+      integrations.push(el.value);
+    });
+    data.integration_methods = integrations.join(', ');
+
+    // Metadata
+    data.submitted_at = new Date().toISOString();
+    data.form_source = 'lgndsai-voice-agent-intake';
+
+    return data;
+  }
+
+  function validate() {
+    let valid = true;
+    const required = [
+      { field: 'f-name', selector: 'input[name="full_name"]' },
+      { field: 'f-company', selector: 'input[name="company_name"]' },
+      { field: 'f-email', selector: 'input[name="email"]' },
+      { field: 'f-phone', selector: 'input[name="phone"]' },
+      { field: 'f-agent-desc', selector: 'textarea[name="agent_description"]' },
+      { field: 'f-end-user', selector: 'textarea[name="end_user"]' },
+      { field: 'f-companies', selector: 'textarea[name="target_companies"]' },
+      { field: 'f-timeline', selector: 'select[name="timeline"]' },
+    ];
+
+    required.forEach(r => {
+      const el = document.querySelector(r.selector);
+      const wrapper = document.getElementById(r.field);
+      if (!el.value || el.value.trim() === '') {
+        wrapper.classList.add('field-error');
+        valid = false;
+      } else {
+        wrapper.classList.remove('field-error');
+      }
+    });
+
+    return valid;
+  }
+
+  async function submitForm() {
+    const statusEl = document.getElementById('status-msg');
+    const btn = document.getElementById('submit-btn');
+
+    // Reset status
+    statusEl.style.display = 'none';
+    statusEl.className = 'status-msg';
+
+    if (!validate()) {
+      statusEl.textContent = 'Please fill out all required fields marked with *';
+      statusEl.className = 'status-msg error';
+      statusEl.style.display = 'block';
+      // Scroll to first error
+      const firstError = document.querySelector('.field-error');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    const data = getFormData();
+
+    // Loading state
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>SUBMITTING...';
+
+    try {
+      const response = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        // Show success overlay
+        document.getElementById('success-overlay').classList.add('show');
+      } else {
+        throw new Error('Server returned ' + response.status);
+      }
+    } catch (err) {
+      console.error('Submit error:', err);
+      statusEl.textContent = 'Something went wrong. Please email brandon@lgndsai.com with your project details.';
+      statusEl.className = 'status-msg error';
+      statusEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'SUBMIT INTAKE';
+    }
+  }
+</script>
 
 </body>
 </html>
