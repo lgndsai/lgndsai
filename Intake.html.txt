@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LGNDS AI — Voice Agent Project Intake</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-dim: #A68A3E;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --card: #161616;
+    --border: #222222;
+    --text: #E8E8E8;
+    --text-dim: #888888;
+    --text-mid: #AAAAAA;
+    --input-bg: #1A1A1A;
+    --danger: #E84855;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–black);
+color: var(–text);
+font-family: ‘DM Sans’, sans-serif;
+min-height: 100vh;
+line-height: 1.6;
+}
+
+/* Subtle grid background */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image:
+linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+background-size: 60px 60px;
+pointer-events: none;
+z-index: 0;
+}
+
+.container {
+position: relative;
+z-index: 1;
+max-width: 720px;
+margin: 0 auto;
+padding: 40px 24px 60px;
+}
+
+/* Header */
+.header {
+text-align: center;
+margin-bottom: 48px;
+}
+
+.logo-text {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 42px;
+letter-spacing: 6px;
+color: var(–gold);
+margin-bottom: 4px;
+}
+
+.logo-sub {
+font-size: 11px;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: var(–text-dim);
+margin-bottom: 28px;
+}
+
+.header-line {
+width: 60px;
+height: 2px;
+background: var(–gold);
+margin: 0 auto 28px;
+}
+
+.header-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 28px;
+letter-spacing: 3px;
+color: var(–text);
+margin-bottom: 8px;
+}
+
+.header-desc {
+font-size: 14px;
+color: var(–text-dim);
+max-width: 520px;
+margin: 0 auto;
+line-height: 1.7;
+}
+
+/* Sections */
+.section {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 8px;
+padding: 32px 28px;
+margin-bottom: 20px;
+}
+
+.section-number {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 13px;
+letter-spacing: 3px;
+color: var(–gold);
+margin-bottom: 4px;
+}
+
+.section-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 22px;
+letter-spacing: 2px;
+color: var(–text);
+margin-bottom: 20px;
+}
+
+/* Form elements */
+.field {
+margin-bottom: 20px;
+}
+
+.field:last-child {
+margin-bottom: 0;
+}
+
+label {
+display: block;
+font-size: 13px;
+font-weight: 600;
+color: var(–text-mid);
+margin-bottom: 6px;
+letter-spacing: 0.3px;
+}
+
+.required::after {
+content: ’ *’;
+color: var(–gold);
+}
+
+input[type=“text”],
+input[type=“email”],
+input[type=“tel”],
+input[type=“url”],
+input[type=“number”],
+textarea,
+select {
+width: 100%;
+background: var(–input-bg);
+border: 1px solid var(–border);
+border-radius: 6px;
+padding: 12px 14px;
+font-family: ‘DM Sans’, sans-serif;
+font-size: 14px;
+color: var(–text);
+transition: border-color 0.2s;
+outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+border-color: var(–gold);
+}
+
+input::placeholder, textarea::placeholder {
+color: #444;
+}
+
+textarea {
+resize: vertical;
+min-height: 80px;
+}
+
+select {
+cursor: pointer;
+appearance: none;
+background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘8’%3E%3Cpath d=‘M1 1l5 5 5-5’ stroke=’%23888’ stroke-width=‘1.5’ fill=‘none’/%3E%3C/svg%3E”);
+background-repeat: no-repeat;
+background-position: right 14px center;
+padding-right: 36px;
+}
+
+select option {
+background: var(–dark);
+color: var(–text);
+}
+
+.field-hint {
+font-size: 12px;
+color: var(–text-dim);
+margin-top: 4px;
+line-height: 1.5;
+}
+
+.row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 16px;
+}
+
+@media (max-width: 540px) {
+.row { grid-template-columns: 1fr; }
+}
+
+/* Checkbox group */
+.check-group {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.check-item {
+display: flex;
+align-items: center;
+gap: 10px;
+cursor: pointer;
+}
+
+.check-item input[type=“checkbox”] {
+width: 18px;
+height: 18px;
+accent-color: var(–gold);
+cursor: pointer;
+}
+
+.check-item span {
+font-size: 14px;
+color: var(–text-mid);
+}
+
+/* CTA */
+.cta-section {
+text-align: center;
+margin-top: 36px;
+}
+
+.cta-note {
+font-size: 13px;
+color: var(–text-dim);
+margin-bottom: 20px;
+line-height: 1.6;
+}
+
+.btn-submit {
+display: inline-block;
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 20px;
+letter-spacing: 3px;
+background: var(–gold);
+color: var(–black);
+border: none;
+border-radius: 6px;
+padding: 16px 52px;
+cursor: pointer;
+transition: background 0.2s, transform 0.15s;
+}
+
+.btn-submit:hover {
+background: var(–gold-dim);
+transform: translateY(-1px);
+}
+
+.btn-submit:active {
+transform: translateY(0);
+}
+
+.footer-note {
+text-align: center;
+font-size: 12px;
+color: #444;
+margin-top: 40px;
+letter-spacing: 0.5px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="logo-text">LGNDS AI</div>
+    <div class="logo-sub">AI Automation Agency</div>
+    <div class="header-line"></div>
+    <div class="header-title">Voice Agent Project Intake</div>
+    <div class="header-desc">
+      Fill out the details below so we can scope your custom AI voice agent build and get you an official proposal within 24 hours.
+    </div>
+  </div>
+
+  <!-- Section 1: Contact -->
+
+  <div class="section">
+    <div class="section-number">01</div>
+    <div class="section-title">Contact Information</div>
+
+```
+<div class="row">
+  <div class="field">
+    <label class="required">Full Name</label>
+    <input type="text" placeholder="John Smith">
+  </div>
+  <div class="field">
+    <label class="required">Company Name</label>
+    <input type="text" placeholder="Your company">
+  </div>
+</div>
+
+<div class="row">
+  <div class="field">
+    <label class="required">Email</label>
+    <input type="email" placeholder="john@company.com">
+  </div>
+  <div class="field">
+    <label class="required">Phone</label>
+    <input type="tel" placeholder="(555) 555-5555">
+  </div>
+</div>
+
+<div class="field">
+  <label>Website or App URL</label>
+  <input type="url" placeholder="https://yourapp.com">
+  <div class="field-hint">If you have a live app or landing page, drop it here.</div>
+</div>
+```
+
+  </div>
+
+  <!-- Section 2: Project Overview -->
+
+  <div class="section">
+    <div class="section-number">02</div>
+    <div class="section-title">Project Overview</div>
+
+```
+<div class="field">
+  <label class="required">Describe what you need the voice agent to do</label>
+  <textarea rows="4" placeholder="Example: Call private aviation companies, request quotes for specific routes, collect pricing, compare rates across carriers, and book the best option for the end user."></textarea>
+</div>
+
+<div class="field">
+  <label class="required">Who is the end user?</label>
+  <textarea rows="2" placeholder="Example: High-net-worth individuals booking private flights through our app."></textarea>
+  <div class="field-hint">Who will be triggering or benefiting from the voice agent?</div>
+</div>
+
+<div class="field">
+  <label class="required">What companies or services will the agent be calling?</label>
+  <textarea rows="3" placeholder="List specific airlines, brokers, or charter companies. If unknown, describe the type of companies."></textarea>
+</div>
+
+<div class="field">
+  <label>What information will the agent need to collect on each call?</label>
+  <textarea rows="3" placeholder="Example: Price per route, aircraft type, availability, baggage limits, cancellation policy..."></textarea>
+</div>
+```
+
+  </div>
+
+  <!-- Section 3: Technical -->
+
+  <div class="section">
+    <div class="section-number">03</div>
+    <div class="section-title">Technical Details</div>
+
+```
+<div class="row">
+  <div class="field">
+    <label>What is the app built with?</label>
+    <select>
+      <option value="" disabled selected>Select tech stack</option>
+      <option>React Native</option>
+      <option>Flutter</option>
+      <option>Swift (iOS Native)</option>
+      <option>Kotlin (Android Native)</option>
+      <option>Web App (React/Next.js)</option>
+      <option>Other</option>
+      <option>Not sure</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Do you have an existing API?</label>
+    <select>
+      <option value="" disabled selected>Select one</option>
+      <option>Yes, fully built</option>
+      <option>Yes, partially built</option>
+      <option>No, not yet</option>
+      <option>Not sure</option>
+    </select>
+  </div>
+</div>
+
+<div class="field">
+  <label>How should the voice agent connect to your app?</label>
+  <div class="check-group">
+    <label class="check-item"><input type="checkbox"><span>API integration (agent sends data to your backend)</span></label>
+    <label class="check-item"><input type="checkbox"><span>In-app voice button (user talks to agent inside the app)</span></label>
+    <label class="check-item"><input type="checkbox"><span>Standalone phone number (agent operates via phone calls)</span></label>
+    <label class="check-item"><input type="checkbox"><span>Dashboard/portal (results displayed in a web view)</span></label>
+    <label class="check-item"><input type="checkbox"><span>Not sure yet, need guidance</span></label>
+  </div>
+</div>
+
+<div class="field">
+  <label>Any other tools or platforms we need to integrate with?</label>
+  <input type="text" placeholder="Example: Salesforce, Google Sheets, Slack, custom CRM...">
+</div>
+```
+
+  </div>
+
+  <!-- Section 4: Scale & Timeline -->
+
+  <div class="section">
+    <div class="section-number">04</div>
+    <div class="section-title">Scale & Timeline</div>
+
+```
+<div class="row">
+  <div class="field">
+    <label>Estimated monthly call volume</label>
+    <select>
+      <option value="" disabled selected>Select range</option>
+      <option>Under 100 calls</option>
+      <option>100 to 500 calls</option>
+      <option>500 to 1,000 calls</option>
+      <option>1,000 to 5,000 calls</option>
+      <option>5,000+ calls</option>
+      <option>Not sure yet</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Average call duration estimate</label>
+    <select>
+      <option value="" disabled selected>Select range</option>
+      <option>Under 2 minutes</option>
+      <option>2 to 5 minutes</option>
+      <option>5 to 10 minutes</option>
+      <option>10+ minutes</option>
+      <option>No idea</option>
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <div class="field">
+    <label class="required">When do you need this live?</label>
+    <select>
+      <option value="" disabled selected>Select timeline</option>
+      <option>ASAP (1 to 2 weeks)</option>
+      <option>This month</option>
+      <option>Within 60 days</option>
+      <option>No rush, just scoping</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Budget range for the build</label>
+    <select>
+      <option value="" disabled selected>Select range</option>
+      <option>$5K to $10K</option>
+      <option>$10K to $15K</option>
+      <option>$15K to $25K</option>
+      <option>$25K+</option>
+      <option>Need guidance on pricing</option>
+    </select>
+  </div>
+</div>
+
+<div class="field">
+  <label>Should the agent be able to actually book flights or just collect and compare rates?</label>
+  <select>
+    <option value="" disabled selected>Select one</option>
+    <option>Collect and compare rates only</option>
+    <option>Collect, compare, AND book</option>
+    <option>Start with rates, add booking later</option>
+  </select>
+</div>
+```
+
+  </div>
+
+  <!-- Section 5: Anything Else -->
+
+  <div class="section">
+    <div class="section-number">05</div>
+    <div class="section-title">Anything Else</div>
+
+```
+<div class="field">
+  <label>Any specific requirements, concerns, or context we should know?</label>
+  <textarea rows="4" placeholder="Anything else that would help us understand your vision and build the right solution."></textarea>
+</div>
+
+<div class="field">
+  <label>How did you hear about LGNDS AI?</label>
+  <input type="text" placeholder="Referral, LinkedIn, other...">
+</div>
+```
+
+  </div>
+
+  <div class="cta-section">
+    <div class="cta-note">
+      Once submitted, our team will review your answers and send a custom proposal within 24 hours.
+    </div>
+    <button class="btn-submit" onclick="alert('Form submitted! LGNDS AI will be in touch within 24 hours.')">SUBMIT INTAKE</button>
+  </div>
+
+  <div class="footer-note">LGNDS AI &mdash; Built to Automate. Designed to Scale.</div>
+
+</div>
+
+</body>
+</html>
